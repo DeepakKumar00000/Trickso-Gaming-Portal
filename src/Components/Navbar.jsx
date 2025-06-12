@@ -81,6 +81,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/autoplay";
 import { Autoplay } from "swiper/modules";
+import { useEffect } from "react";
 
 // Images
 import img1 from "/img1.jpg";
@@ -88,24 +89,36 @@ import img2 from "/img2.jpg";
 import img3 from "/img3.jpg";
 import img4 from "/img4.avif";
 // import img5 from "/img5.avif"
-import img6 from "/img6.avif"
-
-
+import img6 from "/img6.avif";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const images = [img1, img2, img3, img4,img6];
+  useEffect(() => {
+  const handleScroll = () => {
+    setMenuOpen(false);
+  };
+
+  if (menuOpen) {
+    window.addEventListener("scroll", handleScroll);
+  }
+
+  return () => {
+    window.removeEventListener("scroll", handleScroll);
+  };
+}, [menuOpen]);
+
+  const images = [img1, img2, img3, img4, img6];
 
   return (
     <div className="relative w-full h-screen bg-blue-900 overflow-hidden ">
       {/* Top right nav block */}
       {/* <div className="absolute top-0 right-0 w-[60vw] h-[100px] bg-blue-900 z-20 flex items-center justify-around px-8 space-x-4 text-yellow-400 font-bold text-sm md:text-base rounded-bl-3xl"> */}
       <div className="absolute top-0 right-0  md:w-[60vw] w-[calc(100%-125px)] h-[100px] bg-blue-900 z-20 flex items-center justify-around px-4 space-x-2 text-yellow-400 font-bold text-sm md:text-base rounded-bl-3xl">
-
         {/* Mobile User ID button inside yellow rounded pill */}
-        <div className="ml-auto"><button className="bg-yellow-400 text-blue-900 px-7 py-4 mt-3 rounded-full text-xs font-bold md:hidden">
-          User ID
-        </button>
+        <div className="ml-auto">
+          <button className="bg-yellow-400 text-blue-900 px-7 py-4 mt-3 rounded-full text-xs font-bold md:hidden">
+            User ID
+          </button>
         </div>
         {/* Mobile Hamburger icon with spacing */}
         <div className="md:hidden">
@@ -119,7 +132,6 @@ const Navbar = () => {
 
         {/* Desktop nav links + User ID button inside one yellow rounded pill */}
         <div className="hidden md:flex items-center bg-yellow-400 px-10 py-2 rounded-2xl text-blue-900 font-bold text-sm md:text-base flex-grow max-w-[1000px] justify-between">
-        
           <div className="flex space-x-8">
             <button
               onClick={() => {
@@ -160,7 +172,7 @@ const Navbar = () => {
       </div>
 
       {/* Mobile dropdown menu */}
-    
+
       {menuOpen && (
         <div className="absolute top-[90px] right-4 bg-yellow-400 text-blue-900 p-4 rounded-lg flex flex-col space-y-2 md:hidden z-40 shadow-lg">
           <button
@@ -209,51 +221,35 @@ const Navbar = () => {
       </div>
 
       {/* Main content container with Swiper */}
-      {/* <div className="absolute top-[30px] left-0 w-full h-[calc(100%-30px)] z-10 bg-blue-900 p-5">
-        <Swiper
-          modules={[Autoplay]}
-          autoplay={{ delay: 3000 }}
-          loop={true}
-          className="w-full h-full"
-        >
-          {images.map((img, index) => (
-            <SwiperSlide key={index}>
-              <div
-                className="w-full h-full bg-cover bg-center rounded-2xl overflow-hidden"
-                style={{ backgroundImage: `url(${img})` }}
-              />
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </div> */}
 
       <div
-  className="absolute left-0 w-full z-10 bg-blue-900 p-5"
-  style={{
-    top: window.innerWidth < 768 ? "100px" : "30px",
-    height: window.innerWidth < 768 ? "calc(100% - 100px)" : "calc(100% - 30px)",
-  }}
->
-  <div className="w-full h-full rounded-2xl overflow-hidden">
-    <Swiper
-      modules={[Autoplay]}
-      autoplay={{ delay: 3000 }}
-      loop={true}
-      className="w-full h-full"
-    >
-      {images.map((img, index) => (
-        <SwiperSlide key={index}>
-          <div
-            className="w-full h-full bg-cover bg-center"
-            style={{ backgroundImage: `url(${img})` }}
-          />
-        </SwiperSlide>
-      ))}
-    </Swiper>
-  </div>
-</div>
-
-      
+        className="absolute left-0 w-full z-10 bg-blue-900 p-5"
+        style={{
+          top: window.innerWidth < 768 ? "100px" : "30px",
+          height:
+            window.innerWidth < 768
+              ? "calc(100% - 100px)"
+              : "calc(100% - 30px)",
+        }}
+      >
+        <div className="w-full h-full rounded-2xl overflow-hidden">
+          <Swiper
+            modules={[Autoplay]}
+            autoplay={{ delay: 3000 }}
+            loop={true}
+            className="w-full h-full"
+          >
+            {images.map((img, index) => (
+              <SwiperSlide key={index}>
+                <div
+                  className="w-full h-full bg-cover bg-center"
+                  style={{ backgroundImage: `url(${img})` }}
+                />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+      </div>
     </div>
   );
 };

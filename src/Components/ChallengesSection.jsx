@@ -24,7 +24,7 @@ const ChallengesSection = () => {
         {challenges.map((item, index) => (
           <div
             key={index}
-            className="bg-yellow-400 rounded-xl overflow-hidden shadow-lg flex flex-col min-w-[330px]"
+            className="bg-yellow-400 rounded-xl overflow-hidden shadow-lg flex flex-col w-full"
           >
             <img
               src={item.img}

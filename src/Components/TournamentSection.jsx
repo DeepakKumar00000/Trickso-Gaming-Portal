@@ -41,7 +41,9 @@ const TournamentSection = () => {
       id="category"
       className="min-h-screen bg-blue-900 p-6 flex items-center justify-center"
     >
-      <div className="relative w-full max-w-[1500px] px-4 mx-auto">
+      {/* <div className="relative w-full max-w-[1500px] px-4 mx-auto"> */}
+      <div className="relative w-[95%] sm:w-full max-w-[1500px] px-1 sm:px-3 mx-auto">
+
         <h2 className="text-3xl font-bold text-white mb-6 italic text-center">
           CATEGORIES
         </h2>
@@ -69,18 +71,32 @@ const TournamentSection = () => {
           >
             {chunked.map((group, slideIndex) => (
               <SwiperSlide key={slideIndex}>
-                <div className="flex justify-center gap-4 flex-wrap pt-10">
+                {/* <div className="flex justify-center gap-4 flex-wrap pt-10"> */}
+                <div className="flex justify-center gap-2 sm:gap-4 flex-wrap pt-10">
+
                   {group.map((imgObj, index) => (
-                    <div
-                      key={index}
-                      onClick={() =>
-                        navigate(`/category/${imgObj.title.toLowerCase()}`)
-                      } 
-                      className={`cursor-pointer
-      overflow-hidden w-[310px] bg-black shadow-lg rounded-2xl transition-transform duration-300 transform skew-y-[-5deg] md:hover:scale-95
-      ${index < 3 ? "h-[420px] -translate-y-6" : "h-[390px]"}`}
-                      style={{ position: "relative" }}
-                    >
+      //               <div
+      //                 key={index}
+      //                 onClick={() =>
+      //                   navigate(`/category/${imgObj.title.toLowerCase()}`)
+      //                 } 
+      //                 className={`cursor-pointer
+      // overflow-hidden w-[310px] bg-black shadow-lg rounded-2xl transition-transform duration-300 transform skew-y-[-5deg] md:hover:scale-95
+      // ${index < 3 ? "h-[420px] -translate-y-6" : "h-[390px]"}`}
+      //                 style={{ position: "relative" }}
+      //               >
+
+          <div
+  key={index}
+  onClick={() =>
+    navigate(`/category/${imgObj.title.toLowerCase()}`)
+  } 
+  className={`cursor-pointer
+    overflow-hidden w-full sm:w-[300px] bg-black shadow-lg rounded-2xl transition-transform duration-300 transform skew-y-[-5deg] md:hover:scale-95
+    ${index < 3 ? "min-h-[350px] sm:min-h-[420px] -translate-y-6" : "min-h-[330px] sm:min-h-[390px]"}`}
+  style={{ position: "relative" }}
+>
+
                       <img
                         src={imgObj.src}
                         alt={imgObj.title}
